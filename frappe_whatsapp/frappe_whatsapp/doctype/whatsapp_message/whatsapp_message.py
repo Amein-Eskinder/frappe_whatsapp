@@ -11,6 +11,9 @@ from frappe_whatsapp.utils import get_whatsapp_account, format_number
 class WhatsAppMessage(Document):
     def validate(self):
         self.set_whatsapp_account()
+        # Desk submits '' for empty JSON fields, which fails MariaDB's json_valid() check; normalize to NULL.
+        if self.product_catalog_json == "":
+            self.product_catalog_json = None
 
     def on_update(self):
         self.update_profile_name()
@@ -41,8 +44,15 @@ class WhatsAppMessage(Document):
             }).insert(ignore_permissions=True)
 
     def set_whatsapp_account(self):
-        """Set whatsapp account to default if missing"""
+        """Set whatsapp account from the logged-in user, else the default."""
         if not self.whatsapp_account:
+            # Resolve dynamically from the logged-in user's mapped WhatsApp Account
+            user_account = frappe.db.get_value(
+                "WhatsApp Account", {"user": frappe.session.user}, "name"
+            )
+            if user_account:
+                self.whatsapp_account = user_account
+                return
             account_type = 'outgoing' if self.type == 'Outgoing' else 'incoming'
             default_whatsapp_account = get_whatsapp_account(account_type=account_type)
             if not default_whatsapp_account:

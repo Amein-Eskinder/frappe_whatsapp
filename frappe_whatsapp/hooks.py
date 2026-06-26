@@ -15,6 +15,19 @@ app_license = "MIT"
 app_include_js = "/assets/frappe_whatsapp/js/frappe_whatsapp.js"
 # app_include_js = ["frappe_whatsapp.js"]
 
+# Frappe Assistant Core — expose a purpose-built WhatsApp tool to the AI
+# (discovered automatically when frappe_assistant_core is installed).
+assistant_tools = [
+    "frappe_whatsapp.assistant_tools.send_whatsapp_message.SendWhatsAppMessage",
+    "frappe_whatsapp.assistant_tools.send_whatsapp_template.SendWhatsAppTemplate",
+]
+
+# Ship the per-user routing field (WhatsApp Account.user) with the app so it
+# is created on install/migrate — the send tools resolve the account from it.
+fixtures = [
+    {"dt": "Custom Field", "filters": [["name", "in", ["WhatsApp Account-user"]]]},
+]
+
 # include js, css files in header of web template
 # web_include_css = "/assets/frappe_whatsapp/css/frappe_whatsapp.css"
 # web_include_js = "/assets/frappe_whatsapp/js/frappe_whatsapp.js"
