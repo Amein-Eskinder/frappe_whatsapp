@@ -22,10 +22,21 @@ assistant_tools = [
     "frappe_whatsapp.assistant_tools.send_whatsapp_template.SendWhatsAppTemplate",
 ]
 
+# Teach the AI how to use the WhatsApp tools — MCP skills surfaced as resources.
+assistant_skills = [
+    {
+        "app": "frappe_whatsapp",
+        "manifest": "data/assistant_skills.json",
+        "content_dir": "data/skills",
+    },
+]
+
 # Ship the per-user routing field (WhatsApp Account.user) with the app so it
 # is created on install/migrate — the send tools resolve the account from it.
 fixtures = [
     {"dt": "Custom Field", "filters": [["name", "in", ["WhatsApp Account-user"]]]},
+    # No assistant_prompts hook exists, so ship the prompt as a fixture (is_system=0).
+    {"dt": "Prompt Template", "filters": [["prompt_id", "in", ["wa_followup"]]]},
 ]
 
 # include js, css files in header of web template

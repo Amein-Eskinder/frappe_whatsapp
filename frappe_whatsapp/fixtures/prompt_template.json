@@ -1,0 +1,62 @@
+[
+ {
+  "arguments": [
+   {
+    "allowed_values": null,
+    "argument_name": "phone",
+    "argument_type": "string",
+    "default_value": null,
+    "description": "Recipient phone in international format, e.g. +15551234567",
+    "display_label": "Phone",
+    "is_required": 1,
+    "max_length": 0,
+    "min_length": 0,
+    "validation_regex": null
+   },
+   {
+    "allowed_values": null,
+    "argument_name": "purpose",
+    "argument_type": "string",
+    "default_value": null,
+    "description": "What the follow-up is about",
+    "display_label": "Purpose",
+    "is_required": 1,
+    "max_length": 0,
+    "min_length": 0,
+    "validation_regex": null
+   },
+   {
+    "allowed_values": null,
+    "argument_name": "contact_name",
+    "argument_type": "string",
+    "default_value": null,
+    "description": "Contact's name, for personalization",
+    "display_label": "Contact Name",
+    "is_required": 0,
+    "max_length": 0,
+    "min_length": 0,
+    "validation_regex": null
+   }
+  ],
+  "category": null,
+  "description": "Draft and send a WhatsApp follow-up message to a contact via the WhatsApp tools.",
+  "docstatus": 0,
+  "doctype": "Prompt Template",
+  "is_system": 0,
+  "last_used": null,
+  "modified": "2026-06-27 03:54:52.810846",
+  "name": "PT-00035",
+  "owner_user": "Administrator",
+  "parent_version": null,
+  "prompt_id": "wa_followup",
+  "rendering_engine": "Jinja2",
+  "shared_with_roles": [],
+  "status": "Published",
+  "template_content": "Send a WhatsApp follow-up to {{ phone }}{% if contact_name %} ({{ contact_name }}){% endif %}.\n\nPurpose of the follow-up: {{ purpose }}\n\nWrite a short, friendly WhatsApp message (1-3 sentences) for this purpose, then send it with the send_whatsapp_message tool. The sending account resolves automatically from the logged-in user. If this starts a NEW conversation and the contact has not messaged in the last 24 hours, use send_whatsapp_template with an approved template instead of free-form text.",
+  "title": "WhatsApp Follow-up",
+  "use_count": 0,
+  "version_notes": null,
+  "version_number": 1,
+  "visibility": "Public"
+ }
+]

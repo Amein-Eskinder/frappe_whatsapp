@@ -1,0 +1,22 @@
+[
+  {
+    "skill_id": "frappe-whatsapp-send-message",
+    "title": "How to Use send_whatsapp_message",
+    "description": "Send a WhatsApp text or reply within the 24h window; the account auto-resolves from the logged-in user. For new conversations outside 24h use a template.",
+    "skill_type": "Tool Usage",
+    "linked_tool": "send_whatsapp_message",
+    "status": "Published",
+    "visibility": "Public",
+    "content_file": "send_whatsapp_message.md"
+  },
+  {
+    "skill_id": "frappe-whatsapp-send-template",
+    "title": "How to Use send_whatsapp_template",
+    "description": "Send an approved WhatsApp template to start a conversation outside the 24h window; find the template then pass body_parameters in order.",
+    "skill_type": "Tool Usage",
+    "linked_tool": "send_whatsapp_template",
+    "status": "Published",
+    "visibility": "Public",
+    "content_file": "send_whatsapp_template.md"
+  }
+]
